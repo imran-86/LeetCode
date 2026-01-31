@@ -1,6 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std; 
-#define ll long long int
 class Solution {
   public : 
   int dfs(vector<vector<int>>&grid,int r,
@@ -36,31 +33,3 @@ public:
         return maxArea;
     }
 };
-void solve() {
-    Solution sol;
-    vector<vector<char>>grid;
-    grid = {
-  {'1','1','1','1','0'},
-  {'1','1','0','1','0'},
-  {'1','1','0','0','0'},
-  {'0','0','0','0','0'}
-};
-    cout<<sol.maxAreaOfIsland(grid)<<'\n';
-
-}
-
-int main()
-{
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
-
-
-  int t=1;
-  cin>>t;
-  while(t--)
-  {
-    solve();
-  }
-  return 0;
-
-}
