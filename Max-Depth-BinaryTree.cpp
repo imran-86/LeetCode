@@ -12,18 +12,16 @@ struct TreeNode {
 
 class Solution {
 public:
-       TreeNode* invertTree(TreeNode* root) {
-        if(root==nullptr){
-            return nullptr;
-        }
-        TreeNode* temp = root->left;
-        root->left = root->right;
-        root->right=temp;
-        invertTree(root->left);
-        invertTree(root->right);
-        return root;
-     }
- };
+    int maxDepth(TreeNode* root) {
+       if(root==nullptr){
+        return 0;
+       }
+       int leftDepth = maxDepth(root->left);
+       int rightDepth = maxDepth(root->right);
+
+       return max(leftDepth,rightDepth) + 1;
+    }
+};
     
 
 class TreeHelper {
@@ -60,22 +58,14 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         cout << "[";
-        bool first = true;
-        
         while(!q.empty()){
             TreeNode* node = q.front();
             q.pop();
-            
-            if(!first) cout << ",";
-            first = false;
-            
             if(node){
-                cout << node->val;
+                cout << node->val<<" ";
                 q.push(node->left);
                 q.push(node->right);
-            } else {
-                cout << "null";
-            }
+            } 
         }
         cout << "]" << endl;
     }
@@ -100,11 +90,10 @@ public:
 int main() {
     TreeHelper helper;
     Solution solution;
-    vector<int> nodes1 = {4,2,7,1,3,6,9};  
+    vector<int> nodes1 = {3,9,20,-1,-1,15,7};  
     TreeNode* root1 = helper.buildTree(nodes1);
     
-    TreeNode* invert = solution.invertTree(r);
-    helper.printTree(invert);
+    int height  = solution.maxDepth(root1);
     helper.deleteTree(root1);
 
     
